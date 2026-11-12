@@ -23,7 +23,8 @@
     "Логическая модель БД.xlsx": 8,
     "Листы импорта БД.xlsx": 8
   },
-  "spreadsheet_style": "Default black text, white background, standard grid",
+  "spreadsheet_style": "Reference zadanie: yellow conceptual table labels and horizontal Russian fields; per-table logical tabs with SQL type and keys inside column headers; raw import headers preserved",
   "logical_import_csv_schema_match": true,
-  "foreign_keys": 7
+  "foreign_keys": 7,
+  "style_reference": "https://docs.google.com/spreadsheets/d/1uYMPWVys8ihTryiWv5LzYEEo-oCKe-ydlm6pIsgWQKE/edit"
 }
