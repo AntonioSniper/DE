@@ -1,0 +1,23 @@
+[
+  {
+    "file": "slide-1.webp",
+    "width": 1280,
+    "height": 720,
+    "original_bytes": 2323804,
+    "webp_bytes": 102596
+  },
+  {
+    "file": "slide-2.webp",
+    "width": 1280,
+    "height": 720,
+    "original_bytes": 2546012,
+    "webp_bytes": 133672
+  },
+  {
+    "file": "slide-3.webp",
+    "width": 1280,
+    "height": 720,
+    "original_bytes": 1996143,
+    "webp_bytes": 73326
+  }
+]

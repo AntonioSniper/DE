@@ -1,0 +1,15 @@
+document.addEventListener('DOMContentLoaded',()=>{
+ const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('[data-goto]')];let current=0,timer,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function show(n){if(!slides.length)return;current=(n+slides.length)%slides.length;slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',i===current?'false':'true')});dots.forEach((d,i)=>{d.classList.toggle('active',i===current);d.setAttribute('aria-pressed',i===current?'true':'false')})}
+ function start(){clearInterval(timer);if(slides.length&&!paused&&!document.hidden)timer=setInterval(()=>show(current+1),2000)}
+ document.querySelectorAll('[data-slide]').forEach(b=>b.addEventListener('click',()=>{show(current+Number(b.dataset.slide));start()}));dots.forEach(b=>b.addEventListener('click',()=>{show(Number(b.dataset.goto));start()}));
+ const pause=document.querySelector('#pause');if(pause){function sync(){pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-label',paused?'Продолжить слайдер':'Приостановить слайдер')}pause.addEventListener('click',()=>{paused=!paused;sync();start()});sync()}
+ document.addEventListener('visibilitychange',start);show(0);start();
+ function mask(input,limit,format,changed=()=>{}){
+  function update(){const count=input.value.slice(0,input.selectionStart??input.value.length).replace(/\D/g,'').length;input.value=format(input.value.replace(/\D/g,'').slice(0,limit));let pos=0,n=0;while(pos<input.value.length&&n<count){if(/\d/.test(input.value[pos]))n++;pos++}while(pos<input.value.length&&/\D/.test(input.value[pos]))pos++;input.setSelectionRange(pos,pos);changed(input.value)}
+  input.addEventListener('input',update);input.addEventListener('keydown',e=>{if(input.selectionStart!==input.selectionEnd)return;let p=input.selectionStart;if(e.key==='Backspace'){while(p>0&&/\D/.test(input.value[p-1]))p--}else if(e.key==='Delete'){while(p<input.value.length&&/\D/.test(input.value[p]))p++}else return;input.setSelectionRange(p,p)});if(input.value)update();
+ }
+ document.querySelectorAll('[data-phone]').forEach(input=>mask(input,11,d=>{if(!d)return '';let v=d[0];if(d.length>1)v+='('+d.slice(1,4);if(d.length>=4)v+=')';if(d.length>4)v+=d.slice(4,7);if(d.length>=7)v+='-';if(d.length>7)v+=d.slice(7,9);if(d.length>=9)v+='-';if(d.length>9)v+=d.slice(9,11);return v}));
+ const date=document.querySelector('[data-date]'),calendar=document.querySelector('#calendar'),open=document.querySelector('#open-calendar');
+ if(date){mask(date,8,d=>d.slice(0,2)+(d.length>=2?'.':'')+d.slice(2,4)+(d.length>=4?'.':'')+d.slice(4,8),v=>{const m=/^(\d{2})\.(\d{2})\.(\d{4})$/.exec(v);calendar.value=m?`${m[3]}-${m[2]}-${m[1]}`:''});calendar.addEventListener('change',()=>{if(!calendar.value){date.value='';return}const [y,m,d]=calendar.value.split('-');date.value=`${d}.${m}.${y}`});open.addEventListener('click',()=>{if(calendar.showPicker){try{calendar.showPicker();return}catch(_){}}calendar.classList.add('fallback');calendar.removeAttribute('tabindex');calendar.focus()})}
+});

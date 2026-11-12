@@ -1,0 +1,2 @@
+user_id,role_id,login,password_hash,full_name,phone,email
+1,1,Admin,$2y$10$Q2spvZxSRRfzks70ZuWsEuD5CY8f9yVVG2criTxjSxYGKYeE1M4TO,Педагог организатор,8(800)555-35-35,admin@example.com
