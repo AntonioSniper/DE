@@ -48,3 +48,5 @@ CSV: https://drive.google.com/drive/folders/143uBuTsLSZsWgnK4TNJ0v3FGRtNrQNpv
 Логическая модель: https://docs.google.com/spreadsheets/d/1mTHu4VpiKt9pxpTnALlbr0iw2v2AqVlfYFfdpC2-1Lg/edit
 
 Листы импорта: https://docs.google.com/spreadsheets/d/1kZShvAGeeZtmavcK51sPwFYmWSYJOv8MY_Bq5Vp2ZxE/edit
+
+Логическая модель разделена на восемь листов по таблицам SQL. На каждом листе описаны ключи, зависимости и 3НФ; импортные листы и CSV содержат те же поля без служебных строк. Обоснование: материалы/Нормализация 3НФ.txt.

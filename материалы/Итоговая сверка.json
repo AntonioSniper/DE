@@ -20,8 +20,10 @@
   "services_stopped": true,
   "xlsx_sheets_per_file": {
     "Концептуальная модель БД.xlsx": 1,
-    "Логическая модель БД.xlsx": 1,
+    "Логическая модель БД.xlsx": 8,
     "Листы импорта БД.xlsx": 8
   },
-  "spreadsheet_style": "Default black text, white background, standard grid"
+  "spreadsheet_style": "Default black text, white background, standard grid",
+  "logical_import_csv_schema_match": true,
+  "foreign_keys": 7
 }
