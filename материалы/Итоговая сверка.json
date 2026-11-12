@@ -3,7 +3,6 @@
   "seed_counts_match": true,
   "original_text_preserved": true,
   "seven_colors_present": true,
-  "xlsx_sheets": 10,
   "http_checks_passed": 30,
   "clean_database_counts": {
     "roles": 2,
@@ -18,5 +17,11 @@
   "launcher_start_and_stop_verified": true,
   "apache_http_verified": false,
   "reason": "Windows access check AH00035 in automation sandbox; tested XAMPP PHP+MySQL launcher instead",
-  "services_stopped": true
+  "services_stopped": true,
+  "xlsx_sheets_per_file": {
+    "Концептуальная модель БД.xlsx": 1,
+    "Логическая модель БД.xlsx": 1,
+    "Листы импорта БД.xlsx": 8
+  },
+  "spreadsheet_style": "Default black text, white background, standard grid"
 }

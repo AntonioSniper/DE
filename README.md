@@ -13,7 +13,7 @@
 В среде автоматической проверки Apache запустился, но Windows отклонила проверку доступа к родительской папке Documents (AH00035, 403). Поэтому HTTP-сценарии проверены через PHP из того же XAMPP, а рабочий резервный запуск использует PHP-сервер. Не отключались проверки доступа Windows. Для обычного запуска Apache можно использовать панель XAMPP; его доступность вне среды автоматизации отдельно не подтверждена.
 
 ## Состав комплекта
-- материалы: оригинальный текст, DOCX/PDF/HTML с семью цветами, XLSX с концептуальной и логической моделями и восемью импортными листами, ER-диаграмма из phpMyAdmin, мобильные снимки, результаты проверок.
+- материалы: оригинальный текст, DOCX/PDF/HTML с семью цветами, отдельные XLSX с концептуальной моделью, логической моделью и восемью импортными листами, ER-диаграмма из phpMyAdmin, мобильные снимки, результаты проверок.
 - импорт CSV: восемь CSV и порядок импорта.
 - приложение: PHP, локальные CSS/JS/изображения, схема, начальные данные, CLI-импорт.
 - макеты HTML: шесть самостоятельных страниц с локальными ресурсами; формы демонстрационные. Показанные заявки синтетические и удалены из рабочей БД после проверки.
@@ -36,6 +36,15 @@
 
 Разбор ТЗ: https://docs.google.com/document/d/1l6yIfpdedQdcf4C5tEGr3D83-k_CtjM0fwx805t8j8U/edit
 
-Модели БД: https://docs.google.com/spreadsheets/d/1kZShvAGeeZtmavcK51sPwFYmWSYJOv8MY_Bq5Vp2ZxE/edit
+
+Таблицы оформлены обычным чёрным шрифтом на белом фоне со стандартной сеткой. На Google Диске все материалы находятся в папке «корочки для антона».
 
 CSV: https://drive.google.com/drive/folders/143uBuTsLSZsWgnK4TNJ0v3FGRtNrQNpv
+
+Папка: https://drive.google.com/drive/folders/1fZmnQVWMkQtJMM6RPsMGQ6_DqwyD_kGP
+
+Концептуальная модель: https://docs.google.com/spreadsheets/d/1tj2rU1RpULmDnN_Y20VKOtzbPRuqtEAPdUzaNP_WHgE/edit
+
+Логическая модель: https://docs.google.com/spreadsheets/d/1mTHu4VpiKt9pxpTnALlbr0iw2v2AqVlfYFfdpC2-1Lg/edit
+
+Листы импорта: https://docs.google.com/spreadsheets/d/1kZShvAGeeZtmavcK51sPwFYmWSYJOv8MY_Bq5Vp2ZxE/edit
