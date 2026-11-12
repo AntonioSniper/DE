@@ -1,0 +1,150 @@
+[
+  {
+    "check": "5-character login",
+    "passed": true
+  },
+  {
+    "check": "Cyrillic login",
+    "passed": true
+  },
+  {
+    "check": "Punctuation login",
+    "passed": true
+  },
+  {
+    "check": "7-character password",
+    "passed": true
+  },
+  {
+    "check": "Latin name",
+    "passed": true
+  },
+  {
+    "check": "Unformatted phone",
+    "passed": true
+  },
+  {
+    "check": "Invalid email",
+    "passed": true
+  },
+  {
+    "check": "Required login",
+    "passed": true
+  },
+  {
+    "check": "Required password",
+    "passed": true
+  },
+  {
+    "check": "Required full_name",
+    "passed": true
+  },
+  {
+    "check": "Required phone",
+    "passed": true
+  },
+  {
+    "check": "Required email",
+    "passed": true
+  },
+  {
+    "check": "Exactly 6 login chars and 8 Unicode password chars",
+    "passed": true
+  },
+  {
+    "check": "Unicode password authentication",
+    "passed": true
+  },
+  {
+    "check": "Invalid date 31.04.2026",
+    "passed": true
+  },
+  {
+    "check": "Invalid date 29.02.2027",
+    "passed": true
+  },
+  {
+    "check": "Invalid date 1.1.2026",
+    "passed": true
+  },
+  {
+    "check": "Invalid date 00.12.2026",
+    "passed": true
+  },
+  {
+    "check": "Invalid date 20.13.2026",
+    "passed": true
+  },
+  {
+    "check": "Invalid date ",
+    "passed": true
+  },
+  {
+    "check": "Leap date accepted",
+    "passed": true
+  },
+  {
+    "check": "Unknown event rejected",
+    "passed": true
+  },
+  {
+    "check": "Empty team rejected",
+    "passed": true
+  },
+  {
+    "check": "Wrong representative phone rejected",
+    "passed": true
+  },
+  {
+    "check": "Wrong representative email rejected",
+    "passed": true
+  },
+  {
+    "check": "Huge page clamps safely",
+    "passed": true
+  },
+  {
+    "check": "Unknown route is 404",
+    "passed": true
+  },
+  {
+    "check": "GET logout cannot log out",
+    "passed": true
+  },
+  {
+    "check": "Guest cannot see my applications",
+    "passed": true
+  },
+  {
+    "check": "Guest cannot apply",
+    "passed": true
+  },
+  {
+    "check": "SQL injection login denied",
+    "passed": true
+  },
+  {
+    "check": "Private path config.php",
+    "passed": true
+  },
+  {
+    "check": "Private path src/bootstrap.php",
+    "passed": true
+  },
+  {
+    "check": "Private path database/schema.sql",
+    "passed": true
+  },
+  {
+    "check": "Private path database/setup.php",
+    "passed": true
+  },
+  {
+    "check": "Private path assets/../config.php",
+    "passed": true
+  },
+  {
+    "check": "POST logout ends session",
+    "passed": true
+  }
+]

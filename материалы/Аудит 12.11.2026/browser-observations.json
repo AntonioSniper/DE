@@ -1,0 +1,106 @@
+[
+  {
+    "images": [
+      {
+        "height": 720,
+        "loaded": true,
+        "width": 1280
+      },
+      {
+        "height": 720,
+        "loaded": true,
+        "width": 1280
+      },
+      {
+        "height": 720,
+        "loaded": true,
+        "width": 1280
+      }
+    ],
+    "page": "home",
+    "resources": [
+      "assets/bootstrap.min.css",
+      "assets/style.css?v=1794507784",
+      "assets/slide-1.webp",
+      "assets/slide-2.webp",
+      "assets/slide-3.webp",
+      "assets/app.js?v=1794507784"
+    ],
+    "viewport": 414,
+    "width": 399
+  },
+  {
+    "page": "register",
+    "viewport": 414,
+    "width": 414,
+    "phoneMaskEvidence": "Проверка по скриншоту: DOM скрывает значение телефона"
+  },
+  {
+    "page": "login",
+    "passwordAutocomplete": "current-password",
+    "viewport": 414,
+    "width": 414
+  },
+  {
+    "cards": 3,
+    "page": "my",
+    "reviewVisible": true,
+    "viewport": 414,
+    "width": 399
+  },
+  {
+    "cards": 3,
+    "page": "my-second",
+    "pager": "←\n2 / 3\n→"
+  },
+  {
+    "calendar": "2026-12-21",
+    "date": "21.12.2026",
+    "events": 5,
+    "page": "apply",
+    "viewport": 414,
+    "width": 399,
+    "phoneMaskEvidence": "Проверка по скриншоту: DOM скрывает значение телефона"
+  },
+  {
+    "cards": 3,
+    "page": "admin",
+    "viewport": 414,
+    "width": 399
+  },
+  {
+    "page": "admin-filter-save",
+    "url": "http://127.0.0.1:8081/index.php?page=admin&type=2&status=3&p=1",
+    "noticeVisible": true
+  },
+  {
+    "page": "admin-desktop",
+    "viewport": 1280,
+    "width": 1265
+  },
+  {
+    "page": "slider",
+    "transitions": [
+      {
+        "time": 1794510533144,
+        "slide": "01 / 03"
+      },
+      {
+        "time": 1794510535093,
+        "slide": "02 / 03"
+      },
+      {
+        "time": 1794510537340,
+        "slide": "03 / 03"
+      }
+    ],
+    "intervals": [
+      2247
+    ]
+  },
+  {
+    "page": "slider-arrows",
+    "next": "01 / 03",
+    "previous": "03 / 03"
+  }
+]

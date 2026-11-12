@@ -56,8 +56,13 @@ $page=$_GET['page']??'home';
 if(!in_array($page,['home','register','login','apply','my','admin'],true)){http_response_code(404);$page='missing';}
 if(in_array($page,['apply','my','admin'],true)&&!$user)go('login');
 if($page==='admin'&&(int)$user['role_id']!==1){http_response_code(403);$page='forbidden';}
+$malformed=false;
+foreach($_POST as $key=>$value){
+ if(!is_string($value)||str_contains($value,"\0")||!mb_check_encoding($value,'UTF-8')){$malformed=true;$_POST[$key]='';}
+}
 if($_SERVER['REQUEST_METHOD']==='POST'&&$repo){
- if(!hash_equals($_SESSION['csrf'],(string)($_POST['csrf']??''))){http_response_code(403);$errors['general']='Форма устарела. Обновите страницу и повторите отправку.';}
+ if($malformed){http_response_code(400);$errors['general']='Некорректный формат данных формы. Обновите страницу и повторите ввод.';}
+ elseif(!hash_equals($_SESSION['csrf'],(string)($_POST['csrf']??''))){http_response_code(403);$errors['general']='Форма устарела. Обновите страницу и повторите отправку.';}
  else{
   $action=$_POST['action']??'';
   try{
@@ -93,7 +98,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$repo){
    if($action==='status'&&$page==='admin'&&(int)$user['role_id']===1){
     $status=(int)($_POST['status_id']??0);
     if(!in_array($status,[1,2,3],true))$errors['general']='Выберите корректный статус.';
-    else{$repo->query('UPDATE applications SET status_id=? WHERE application_id=?',[$status,(int)($_POST['application_id']??0)]);flash('Статус заявки сохранён.');go('admin');}
+    elseif(!$repo->query('SELECT application_id FROM applications WHERE application_id=?',[(int)($_POST['application_id']??0)])->fetch()){http_response_code(404);$errors['general']='Заявка не найдена.';}
+    else{$repo->query('UPDATE applications SET status_id=? WHERE application_id=?',[$status,(int)($_POST['application_id']??0)]);flash('Статус заявки сохранён.');go('admin&'.http_build_query(['type'=>max(0,(int)($_GET['type']??0)),'status'=>max(0,(int)($_GET['status']??0)),'p'=>max(1,(int)($_GET['p']??1))]));}
    }
    if($action==='review'&&$page==='my'&&$user){
     $text=trim($_POST['review_text']??'');
@@ -105,7 +111,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'&&$repo){
  }
 }
 function inputField(string $name,string $label,string $type='text',string $hint='',string $default=''):void{
- global $errors;
- echo '<div class="field"><label for="'.e($name).'">'.e($label).'</label><input id="'.e($name).'" name="'.e($name).'" type="'.e($type).'" required '.($type==='password'?'autocomplete="new-password"':'value="'.e($_POST[$name]??$default).'"').' '.($type==='tel'?'inputmode="numeric" autocomplete="tel" data-phone':'').' '.(isset($errors[$name])?'aria-invalid="true"':'').'>';
+ global $errors,$page;
+ echo '<div class="field"><label for="'.e($name).'">'.e($label).'</label><input id="'.e($name).'" name="'.e($name).'" type="'.e($type).'" required '.($type==='password'?'autocomplete="'.($page==='login'?'current-password':'new-password').'"':'value="'.e($_POST[$name]??$default).'"').' '.($type==='tel'?'inputmode="numeric" autocomplete="tel" data-phone':'').' '.(isset($errors[$name])?'aria-invalid="true"':'').'>';
  echo '<small class="'.(isset($errors[$name])?'field-error':'hint').'">'.e($errors[$name]??$hint).'</small></div>';
 }

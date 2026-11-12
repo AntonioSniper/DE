@@ -1,0 +1,32 @@
+[
+  {
+    "check": "Malformed registration array",
+    "actual": 400,
+    "expected": 400,
+    "passed": true
+  },
+  {
+    "check": "NUL in date input",
+    "actual": 400,
+    "expected": 400,
+    "passed": true
+  },
+  {
+    "check": "Admin filters preserved after status change",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "Nonexistent application not reported as saved",
+    "actual": false,
+    "expected": false,
+    "passed": true
+  },
+  {
+    "check": "Login password autocomplete",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  }
+]

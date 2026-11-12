@@ -1,0 +1,279 @@
+{
+    "counts": {
+        "roles": 2,
+        "event_types": 5,
+        "events": 5,
+        "statuses": 3,
+        "users": 1,
+        "applications": 0,
+        "application_members": 0,
+        "reviews": 0
+    },
+    "columns": {
+        "roles": [
+            {
+                "COLUMN_NAME": "role_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "role_name",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            }
+        ],
+        "event_types": [
+            {
+                "COLUMN_NAME": "type_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "type_name",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            }
+        ],
+        "events": [
+            {
+                "COLUMN_NAME": "event_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "event_name",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "type_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL",
+                "COLUMN_DEFAULT": null
+            }
+        ],
+        "statuses": [
+            {
+                "COLUMN_NAME": "status_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "status_name",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            }
+        ],
+        "users": [
+            {
+                "COLUMN_NAME": "user_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "role_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL",
+                "COLUMN_DEFAULT": "2"
+            },
+            {
+                "COLUMN_NAME": "login",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "password_hash",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "full_name",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "phone",
+                "COLUMN_TYPE": "varchar(16)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "email",
+                "COLUMN_TYPE": "varchar(254)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            }
+        ],
+        "applications": [
+            {
+                "COLUMN_NAME": "application_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "user_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "event_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "event_date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "contact_phone",
+                "COLUMN_TYPE": "varchar(16)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "contact_email",
+                "COLUMN_TYPE": "varchar(254)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "status_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL",
+                "COLUMN_DEFAULT": "1"
+            }
+        ],
+        "application_members": [
+            {
+                "COLUMN_NAME": "member_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "application_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "full_name",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            }
+        ],
+        "reviews": [
+            {
+                "COLUMN_NAME": "review_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "application_id",
+                "COLUMN_TYPE": "int(10) unsigned",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI",
+                "COLUMN_DEFAULT": null
+            },
+            {
+                "COLUMN_NAME": "review_text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "",
+                "COLUMN_DEFAULT": null
+            }
+        ]
+    },
+    "foreign_keys": [
+        {
+            "TABLE_NAME": "applications",
+            "COLUMN_NAME": "event_id",
+            "REFERENCED_TABLE_NAME": "events",
+            "REFERENCED_COLUMN_NAME": "event_id"
+        },
+        {
+            "TABLE_NAME": "applications",
+            "COLUMN_NAME": "status_id",
+            "REFERENCED_TABLE_NAME": "statuses",
+            "REFERENCED_COLUMN_NAME": "status_id"
+        },
+        {
+            "TABLE_NAME": "applications",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "user_id"
+        },
+        {
+            "TABLE_NAME": "application_members",
+            "COLUMN_NAME": "application_id",
+            "REFERENCED_TABLE_NAME": "applications",
+            "REFERENCED_COLUMN_NAME": "application_id"
+        },
+        {
+            "TABLE_NAME": "events",
+            "COLUMN_NAME": "type_id",
+            "REFERENCED_TABLE_NAME": "event_types",
+            "REFERENCED_COLUMN_NAME": "type_id"
+        },
+        {
+            "TABLE_NAME": "reviews",
+            "COLUMN_NAME": "application_id",
+            "REFERENCED_TABLE_NAME": "applications",
+            "REFERENCED_COLUMN_NAME": "application_id"
+        },
+        {
+            "TABLE_NAME": "users",
+            "COLUMN_NAME": "role_id",
+            "REFERENCED_TABLE_NAME": "roles",
+            "REFERENCED_COLUMN_NAME": "role_id"
+        }
+    ],
+    "admin_password_valid": true,
+    "er_tables": 8
+}
