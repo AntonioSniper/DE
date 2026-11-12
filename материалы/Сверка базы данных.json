@@ -1,0 +1,71 @@
+{
+    "roles": {
+        "count": 2,
+        "columns": [
+            "role_id",
+            "role_name"
+        ]
+    },
+    "event_types": {
+        "count": 5,
+        "columns": [
+            "type_id",
+            "type_name"
+        ]
+    },
+    "events": {
+        "count": 5,
+        "columns": [
+            "event_id",
+            "event_name",
+            "type_id"
+        ]
+    },
+    "statuses": {
+        "count": 3,
+        "columns": [
+            "status_id",
+            "status_name"
+        ]
+    },
+    "users": {
+        "count": 1,
+        "columns": [
+            "user_id",
+            "role_id",
+            "login",
+            "password_hash",
+            "full_name",
+            "phone",
+            "email"
+        ]
+    },
+    "applications": {
+        "count": 0,
+        "columns": [
+            "application_id",
+            "user_id",
+            "event_id",
+            "event_date",
+            "contact_phone",
+            "contact_email",
+            "status_id"
+        ]
+    },
+    "application_members": {
+        "count": 0,
+        "columns": [
+            "member_id",
+            "application_id",
+            "full_name"
+        ]
+    },
+    "reviews": {
+        "count": 0,
+        "columns": [
+            "review_id",
+            "application_id",
+            "review_text"
+        ]
+    }
+}

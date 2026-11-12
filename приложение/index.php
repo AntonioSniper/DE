@@ -5,7 +5,7 @@ $titles=['home'=>'Внеучебная жизнь техникума','register'
 <?php if($user):if((int)$user['role_id']===1):?><a href="?page=admin">Панель администратора</a><?php else:?><a href="?page=my">Мои регистрации</a><a class="nav-button" href="?page=apply">Подать заявку</a><?php endif?><form method="post"><?=csrf()?><button class="logout" name="action" value="logout">Выйти</button></form><?php else:?><a href="?page=login">Вход</a><a class="nav-button" href="?page=register">Регистрация</a><?php endif?></nav></div></header>
 <main class="shell">
 <?php if($page!=='home'):?><div class="breadcrumbs"><a href="index.php">Главная</a><span>/</span><?=e($titles[$page])?></div><?php endif?>
-<?php if(isset($_SESSION['flash'])):?><div class="notice" role="status"><?=e($_SESSION['flash'])?></div><?php unset($_SESSION['flash']);endif?>
+<?php if(isset($_SESSION['flash'])):?><div class="notice flash-popup" role="status"><?=e($_SESSION['flash'])?><button type="button" class="dismiss" aria-label="Закрыть уведомление">×</button></div><?php unset($_SESSION['flash']);endif?>
 <?php if(isset($errors['general'])):?><div class="notice error" role="alert"><?=e($errors['general'])?></div><?php endif?>
 <?php if($page==='home'):?>
 <section class="intro"><p class="eyebrow">ПОРТАЛ ДЛЯ СТУДЕНТОВ</p><h1>Учёба объединяет.<br><em>Участие открывает новое.</em></h1><p>Олимпиады, конкурсы, экскурсии, мастер-классы и конференции. Выбирайте событие и отправляйте заявку вместе со своей командой.</p><a class="button" href="?page=<?=$user?((int)$user['role_id']===1?'admin':'apply'):'register'?>"><?=$user?((int)$user['role_id']===1?'Панель администратора':'Подать заявку'):'Зарегистрироваться'?> <span aria-hidden="true">↗</span></a></section>

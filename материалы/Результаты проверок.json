@@ -1,0 +1,122 @@
+[
+  {
+    "check": "All five invalid registration fields rejected",
+    "passed": true
+  },
+  {
+    "check": "Registration persisted",
+    "passed": true
+  },
+  {
+    "check": "Unique login enforced",
+    "passed": true
+  },
+  {
+    "check": "Invalid password denied",
+    "passed": true
+  },
+  {
+    "check": "Valid login",
+    "passed": true
+  },
+  {
+    "check": "Ordinary user cannot access admin",
+    "passed": true
+  },
+  {
+    "check": "Invalid event, date, team, contacts rejected",
+    "passed": true
+  },
+  {
+    "check": "Application 1",
+    "passed": true
+  },
+  {
+    "check": "Application 2",
+    "passed": true
+  },
+  {
+    "check": "Application 3",
+    "passed": true
+  },
+  {
+    "check": "Application 4",
+    "passed": true
+  },
+  {
+    "check": "Application 5",
+    "passed": true
+  },
+  {
+    "check": "Application 6",
+    "passed": true
+  },
+  {
+    "check": "Application 7",
+    "passed": true
+  },
+  {
+    "check": "Exactly three cards per first page",
+    "passed": true
+  },
+  {
+    "check": "Second page works",
+    "passed": true
+  },
+  {
+    "check": "Final page works",
+    "passed": true
+  },
+  {
+    "check": "Early review denied",
+    "passed": true
+  },
+  {
+    "check": "CSRF rejected",
+    "passed": true
+  },
+  {
+    "check": "Admin credentials work",
+    "passed": true
+  },
+  {
+    "check": "Admin sees applications",
+    "passed": true
+  },
+  {
+    "check": "Type filter",
+    "passed": true
+  },
+  {
+    "check": "Recorded status persisted",
+    "passed": true
+  },
+  {
+    "check": "Combined type/status filter",
+    "passed": true
+  },
+  {
+    "check": "Review form after participation",
+    "passed": true
+  },
+  {
+    "check": "Foreign review denied",
+    "passed": true
+  },
+  {
+    "check": "Foreign applications hidden",
+    "passed": true
+  },
+  {
+    "check": "Review persisted",
+    "passed": true
+  },
+  {
+    "check": "Duplicate review denied",
+    "passed": true
+  },
+  {
+    "check": "Review visible",
+    "passed": true
+  }
+]

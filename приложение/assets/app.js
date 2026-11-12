@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
+ document.querySelectorAll('.flash-popup').forEach(t=>{t.querySelector('.dismiss').addEventListener('click',()=>t.remove());setTimeout(()=>t.remove(),7000)});
  const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('[data-goto]')];let current=0,timer,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
  function show(n){if(!slides.length)return;current=(n+slides.length)%slides.length;slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',i===current?'false':'true')});dots.forEach((d,i)=>{d.classList.toggle('active',i===current);d.setAttribute('aria-pressed',i===current?'true':'false')})}
  function start(){clearInterval(timer);if(slides.length&&!paused&&!document.hidden)timer=setInterval(()=>show(current+1),2000)}
