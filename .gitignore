@@ -1,2 +1,11 @@
-.runtime/
-*.log
+**/.runtime/
+**/*.log
+**/.env
+**/.env.*
+!**/.env.example
+**/config.local.php
+**/*.bak
+**/*.tmp
+**/Thumbs.db
+**/.DS_Store
+**/Резервная копия*.sql
