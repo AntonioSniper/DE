@@ -1,42 +1,32 @@
-<?php require __DIR__.'/src/bootstrap.php';
-$titles=['home'=>'Внеучебная жизнь техникума','register'=>'Регистрация','login'=>'Авторизация','apply'=>'Заявка на участие','my'=>'Мои регистрации','admin'=>'Панель администратора','missing'=>'Страница не найдена','forbidden'=>'Доступ запрещён'];
-?><!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=e($titles[$page])?> — Мероприятия</title><link rel="stylesheet" href="assets/bootstrap.min.css"><link rel="stylesheet" href="assets/style.css?v=<?=filemtime(__DIR__.'/assets/style.css')?>"></head><body>
-<header><div class="shell header-inner"><a class="brand" href="index.php"><span class="brand-mark" aria-hidden="true">м</span><span>Мероприятия<small>ВНЕУЧЕБНАЯ ЖИЗНЬ ТЕХНИКУМА</small></span></a><nav aria-label="Основная навигация">
-<?php if($user):if((int)$user['role_id']===1):?><a href="?page=admin">Панель администратора</a><?php else:?><a href="?page=my">Мои регистрации</a><a class="nav-button" href="?page=apply">Подать заявку</a><?php endif?><form method="post"><?=csrf()?><button class="logout" name="action" value="logout">Выйти</button></form><?php else:?><a href="?page=login">Вход</a><a class="nav-button" href="?page=register">Регистрация</a><?php endif?></nav></div></header>
-<main class="shell">
-<?php if($page!=='home'):?><div class="breadcrumbs"><a href="index.php">Главная</a><span>/</span><?=e($titles[$page])?></div><?php endif?>
-<?php if(isset($_SESSION['flash'])):?><div class="notice flash-popup" role="status"><?=e($_SESSION['flash'])?><button type="button" class="dismiss" aria-label="Закрыть уведомление">×</button></div><?php unset($_SESSION['flash']);endif?>
-<?php if(isset($errors['general'])):?><div class="notice error" role="alert"><?=e($errors['general'])?></div><?php endif?>
-<?php if($page==='home'):?>
-<section class="intro"><p class="eyebrow">ПОРТАЛ ДЛЯ СТУДЕНТОВ</p><h1>Учёба объединяет.<br><em>Участие открывает новое.</em></h1><p>Олимпиады, конкурсы, экскурсии, мастер-классы и конференции. Выбирайте событие и отправляйте заявку вместе со своей командой.</p><a class="button" href="?page=<?=$user?((int)$user['role_id']===1?'admin':'apply'):'register'?>"><?=$user?((int)$user['role_id']===1?'Панель администратора':'Подать заявку'):'Зарегистрироваться'?> <span aria-hidden="true">↗</span></a></section>
-<section class="slider-wrap" aria-label="Мероприятия техникума" aria-roledescription="карусель"><div class="slider">
-<?php $captions=['Олимпиады и командная работа','Экскурсии и новые впечатления','Студенческая наука и конференции'];foreach($captions as $i=>$caption):?><figure class="slide <?=$i===0?'active':''?>"><img src="assets/slide-<?=$i+1?>.webp" alt="<?=e($caption)?>" width="1280" height="720"><figcaption><span>0<?=$i+1?> / 03</span><strong><?=e($caption)?></strong></figcaption></figure><?php endforeach?>
-</div><div class="slide-controls"><button type="button" data-slide="-1" aria-label="Предыдущий слайд">←</button><div class="dots"><?php for($i=0;$i<3;$i++):?><button type="button" data-goto="<?=$i?>" aria-label="Слайд <?=$i+1?>" class="<?=$i===0?'active':''?>"></button><?php endfor?></div><button type="button" id="pause" aria-label="Приостановить слайдер">Ⅱ</button><button type="button" data-slide="1" aria-label="Следующий слайд">→</button></div></section>
-<?php elseif(in_array($page,['register','login','apply'],true)):?>
-<div class="form-heading"><p class="eyebrow"><?=$page==='apply'?'ВАША КОМАНДА — В ЦЕНТРЕ СОБЫТИЙ':'ПОРТАЛ «МЕРОПРИЯТИЯ»'?></p><h1><?=e($titles[$page])?></h1></div><section class="form-card"><form method="post"><?=csrf()?>
-<?php if($page==='register'):inputField('login','Логин','text','Латиница и цифры, не менее 6 символов');inputField('password','Пароль','password','Не менее 8 символов');inputField('full_name','ФИО','text','Кириллица и пробелы');inputField('phone','Телефон','tel','8(999)123-45-67');inputField('email','Электронная почта','email');?><button class="button full" name="action" value="register" <?=!$repo?'disabled':''?>>Зарегистрироваться</button><a class="form-link" href="?page=login">Уже есть аккаунт? Войти</a>
-<?php elseif($page==='login'):inputField('login','Логин');inputField('password','Пароль','password');?><button class="button full" name="action" value="login" <?=!$repo?'disabled':''?>>Войти в аккаунт</button><a class="form-link" href="?page=register">Еще не зарегистрированы? Регистрация</a>
-<?php else:?>
-<div class="field"><label for="event_id">Наименование мероприятия</label><select id="event_id" name="event_id" required><option value="">Выберите мероприятие</option><?php foreach($repo->events() as $event):?><option value="<?=$event['event_id']?>" <?=(int)($_POST['event_id']??0)===(int)$event['event_id']?'selected':''?>><?=e($event['event_name'])?></option><?php endforeach?></select><small class="field-error"><?=e($errors['event_id']??'')?></small></div>
-<div class="field"><label for="event_date">Дата мероприятия</label><div class="date-entry"><input id="event_date" name="event_date" data-date inputmode="numeric" placeholder="ДД.ММ.ГГГГ" value="<?=e($_POST['event_date']??'')?>" required><button type="button" id="open-calendar" aria-label="Выбрать дату в календаре">▦</button><input type="date" id="calendar" tabindex="-1" aria-label="Дата мероприятия — календарь"></div><small class="<?=isset($errors['event_date'])?'field-error':'hint'?>"><?=e($errors['event_date']??'Введите дату или выберите её в календаре')?></small></div>
-<div class="field"><label for="team">Состав команды</label><textarea id="team" name="team" rows="4" required placeholder="Иванов Иван Иванович&#10;Петрова Анна Сергеевна"><?=e($_POST['team']??'')?></textarea><small class="<?=isset($errors['team'])?'field-error':'hint'?>"><?=e($errors['team']??'ФИО каждого участника с новой строки')?></small></div>
-<?php inputField('contact_phone','Телефон представителя команды','tel','8(999)123-45-67',$user['phone']);inputField('contact_email','Email представителя команды','email','',$user['email']);?><button class="button full" name="action" value="apply">Отправить</button><a class="form-link" href="?page=my">Посмотреть мои регистрации</a>
-<?php endif?></form></section>
-<?php elseif(in_array($page,['my','admin'],true)&&$repo):
-$admin=$page==='admin';$type=(int)($_GET['type']??0);$status=(int)($_GET['status']??0);$where=$admin?'1=1':'a.user_id=?';$params=$admin?[]:[$user['user_id']];
-if($admin&&$type>0){$where.=' AND e.type_id=?';$params[]=$type;}if($admin&&$status>0){$where.=' AND a.status_id=?';$params[]=$status;}
-$from=' FROM applications a JOIN events e ON a.event_id=e.event_id JOIN event_types t ON e.type_id=t.type_id JOIN statuses s ON a.status_id=s.status_id JOIN users u ON a.user_id=u.user_id LEFT JOIN reviews r ON a.application_id=r.application_id';
-$total=(int)$repo->query('SELECT COUNT(*)'.$from.' WHERE '.$where,$params)->fetchColumn();$pages=max(1,(int)ceil($total/3));$current=min($pages,max(1,(int)($_GET['p']??1)));$offset=($current-1)*3;
-$items=$repo->query('SELECT a.*,e.event_name,t.type_name,s.status_name,u.full_name,r.review_id,r.review_text'.$from.' WHERE '.$where.' ORDER BY a.application_id DESC LIMIT 3 OFFSET '.$offset,$params)->fetchAll();
+<?php
+$pageTitle = 'Внеучебная жизнь техникума';
+require __DIR__ . '/src/bootstrap.php';
+if (isset($_GET['page'])) {
+    $files = ['home'=>'index.php', 'register'=>'register.php', 'login'=>'login.php',
+              'apply'=>'apply.php', 'my'=>'my.php', 'admin'=>'admin.php'];
+    $file = $files[$_GET['page']] ?? null;
+    if (!$file) errorPage(404, 'Страница не найдена');
+    $params = $_GET;
+    unset($params['page']);
+    $query = http_build_query($params);
+    header('Location: ' . $file . ($query === '' ? '' : '?' . $query), true, 307);
+    exit;
+}
+require __DIR__ . '/src/header.php';
 ?>
-<div class="list-heading"><div><p class="eyebrow"><?=$admin?'ПЕДАГОГ-ОРГАНИЗАТОР':'ЛИЧНЫЙ КАБИНЕТ'?></p><h1><?=e($titles[$page])?></h1></div><?php if(!$admin):?><a class="button" href="?page=apply">Подать заявку <span aria-hidden="true">+</span></a><?php endif?></div>
-<?php if($admin):?><form class="filters" method="get"><input type="hidden" name="page" value="admin"><label for="type">Тип мероприятия<select name="type" id="type"><option value="0">Все типы</option><?php foreach($repo->query('SELECT * FROM event_types') as $t):?><option value="<?=$t['type_id']?>" <?=$type===(int)$t['type_id']?'selected':''?>><?=e($t['type_name'])?></option><?php endforeach?></select></label><label for="status">Статус<select name="status" id="status"><option value="0">Все статусы</option><?php foreach($repo->query('SELECT * FROM statuses') as $s):?><option value="<?=$s['status_id']?>" <?=$status===(int)$s['status_id']?'selected':''?>><?=e($s['status_name'])?></option><?php endforeach?></select></label><button class="button">Показать</button></form><p class="result-count">Найдено заявок: <?=$total?></p><?php endif?>
-<?php if(!$items):?><section class="empty"><span aria-hidden="true">↗</span><h2><?=$admin?'Заявки не найдены':'Вы ещё не подавали заявки'?></h2><p><?=$admin?'Измените фильтры или дождитесь новых регистраций.':'Выберите мероприятие и отправьте первую заявку на участие.'?></p><?php if(!$admin):?><a class="button" href="?page=apply">Выбрать мероприятие</a><?php endif?></section><?php endif?>
-<div class="cards"><?php foreach($items as $a):?><article class="application" id="application-<?=$a['application_id']?>"><div class="card-top"><span>ЗАЯВКА №<?=$a['application_id']?></span><span class="status status-<?=$a['status_id']?>"><?=e($a['status_name'])?></span></div><p class="event-type"><?=e($a['type_name'])?></p><h2><?=e($a['event_name'])?></h2><dl><dt>Дата мероприятия</dt><dd><?=date('d.m.Y',strtotime($a['event_date']))?></dd><?php if($admin):?><dt>Представитель</dt><dd><?=e($a['full_name'])?></dd><dt>Контакты команды</dt><dd><?=e($a['contact_phone'])?><br><?=e($a['contact_email'])?></dd><dt>Состав команды</dt><dd><?=nl2br(e(implode("\n",$repo->members((int)$a['application_id']))))?></dd><?php endif?></dl>
-<?php if($admin):?><form method="post" class="card-form"><?=csrf()?><input type="hidden" name="application_id" value="<?=$a['application_id']?>"><label for="status-<?=$a['application_id']?>">Статус участия<select id="status-<?=$a['application_id']?>" name="status_id"><?php foreach($repo->query('SELECT * FROM statuses') as $s):?><option value="<?=$s['status_id']?>" <?=(int)$s['status_id']===(int)$a['status_id']?'selected':''?>><?=e($s['status_name'])?></option><?php endforeach?></select></label><button name="action" value="status" class="button full">Сохранить статус</button></form>
-<?php elseif($a['review_id']!==null):?><div class="review"><strong>Ваш отзыв</strong><p><?=nl2br(e($a['review_text']))?></p></div>
-<?php elseif((int)$a['status_id']===3):?><form method="post" class="card-form"><?=csrf()?><input type="hidden" name="application_id" value="<?=$a['application_id']?>"><input type="hidden" name="p" value="<?=$current?>"><label for="review-<?=$a['application_id']?>">Отзыв о мероприятии<textarea id="review-<?=$a['application_id']?>" name="review_text" rows="3" required></textarea></label><button class="button full" name="action" value="review">Оставить отзыв</button></form><?php endif?>
-</article><?php endforeach?></div>
-<?php if($pages>1):?><nav class="pagination" aria-label="Страницы заявок"><?php if($current>1):?><a href="?<?=e(http_build_query(['page'=>$page,'type'=>$type,'status'=>$status,'p'=>$current-1]))?>" aria-label="Предыдущие заявки">←</a><?php else:?><span class="disabled" aria-disabled="true">←</span><?php endif?><span><?=$current?> / <?=$pages?></span><?php if($current<$pages):?><a href="?<?=e(http_build_query(['page'=>$page,'type'=>$type,'status'=>$status,'p'=>$current+1]))?>" aria-label="Следующие заявки">→</a><?php else:?><span class="disabled" aria-disabled="true">→</span><?php endif?></nav><?php endif?>
-<?php else:?><section class="empty"><h1><?=e($titles[$page])?></h1><a href="index.php">Вернуться на главную</a></section><?php endif?>
-</main><footer><div class="shell"><strong>Мероприятия</strong><span>Портал записи студентов на внеучебные мероприятия техникума</span></div></footer><script src="assets/app.js?v=<?=filemtime(__DIR__.'/assets/app.js')?>"></script></body></html>
+<section class="intro">
+<p class="eyebrow">ПОРТАЛ ДЛЯ СТУДЕНТОВ</p>
+<h1>Учёба объединяет.<br><em>Участие открывает новое.</em></h1>
+<p>Олимпиады, конкурсы, экскурсии, мастер-классы и конференции. Выбирайте событие и отправляйте заявку вместе со своей командой.</p><a class="button" href="<?=$user?((int)$user['role_id']===1?'admin.php':'apply.php'):'register.php'?>"><?=$user?((int)$user['role_id']===1?'Панель администратора':'Подать заявку'):'Зарегистрироваться'?> <span aria-hidden="true">↗</span></a></section>
+<section class="slider-wrap" aria-label="Мероприятия техникума" aria-roledescription="карусель">
+<div class="slider">
+<?php $captions=['Олимпиады и командная работа','Экскурсии и новые впечатления','Студенческая наука и конференции'];foreach($captions as $i=>$caption):?>
+<figure class="slide <?=$i===0?'active':''?>"><img src="assets/slide-<?=$i+1?>.webp" alt="<?=e($caption)?>" width="1280" height="720"><figcaption><span>0<?=$i+1?> / 03</span><strong><?=e($caption)?></strong></figcaption></figure><?php endforeach?>
+</div>
+<div class="slide-controls">
+<button type="button" data-slide="-1" aria-label="Предыдущий слайд">←</button>
+<div class="dots"><?php for($i=0;$i<3;$i++):?>
+<button type="button" data-goto="<?=$i?>" aria-label="Слайд <?=$i+1?>" class="<?=$i===0?'active':''?>"></button><?php endfor?></div>
+<button type="button" id="pause" aria-label="Приостановить слайдер">Ⅱ</button>
+<button type="button" data-slide="1" aria-label="Следующий слайд">→</button></div></section>
+<?php require __DIR__ . '/src/footer.php';

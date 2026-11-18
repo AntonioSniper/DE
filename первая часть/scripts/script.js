@@ -83,3 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
  }
 });
+
+const statusPopup = document.querySelector('.status-popup');
+if (statusPopup) setTimeout(() => statusPopup.remove(), 7000);

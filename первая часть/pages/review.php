@@ -1,9 +1,9 @@
 <?php
-session_start();
+
 require_once __DIR__.'/../helpers/db.php';
 if(!isset($_SESSION['user_id'])){header('Location: auth.php');exit;}
 if($_SERVER['REQUEST_METHOD']!=='POST'){header('Location: zayavki.php');exit;}
-$requestId=(int)($_GET['request_id']??0);
+$requestId=(int)filter_var($_GET['request_id'] ?? '', FILTER_VALIDATE_INT);
 $page=max(1,(int)($_POST['p']??1));
 $comment=trim($_POST['comment']??'');
 $back='zayavki.php?p='.$page.'#request-'.$requestId;

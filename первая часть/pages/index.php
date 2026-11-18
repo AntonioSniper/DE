@@ -1,7 +1,7 @@
 <?php
-session_start();
+require_once __DIR__.'/../helpers/security.php';
 $pageTitle = 'Главная — Корочки.Есть';
-$breadcrumbs = [['title' => 'Главная', 'url' => '/DE/korochki/pages/index.php']];
+$breadcrumbs = [['title' => 'Главная', 'url' => 'index.php']];
 
 ob_start();
 ?>
@@ -13,10 +13,10 @@ ob_start();
 <div class="slider-wrapper">
     <button type="button" aria-label="Предыдущий слайд" class="slider-btn slider-btn-prev" onclick="moveSlide(-1)">&#10094;</button>
     <div class="slider">
-        <div class="slide active"><img src="/DE/korochki/media/image01.webp" alt="Обучение в сфере информационных технологий"></div>
-        <div class="slide"><img src="/DE/korochki/media/image03.png" alt="Онлайн-образование"></div>
-        <div class="slide"><img src="/DE/korochki/media/image04.jpg" alt="Освоение новых навыков"></div>
-        <div class="slide"><img src="/DE/korochki/media/image06.jpg" alt="Дополнительное профессиональное образование"></div>
+        <div class="slide active"><img src="../media/slides/slide-1.webp" alt="Обучение в сфере информационных технологий"></div>
+        <div class="slide"><img src="../media/slides/slide-2.webp" alt="Онлайн-образование"></div>
+        <div class="slide"><img src="../media/slides/slide-3.webp" alt="Освоение новых навыков"></div>
+        <div class="slide"><img src="../media/slides/slide-4.webp" alt="Дополнительное профессиональное образование"></div>
     </div>
     <button type="button" aria-label="Следующий слайд" class="slider-btn slider-btn-next" onclick="moveSlide(1)">&#10095;</button>
     <div class="slider-dots">
@@ -29,10 +29,10 @@ ob_start();
 
 <div class="hero-text" style="margin-top: 20px;">
     <p>Выберите курс по программированию, веб-дизайну или проектированию баз данных и подайте заявку на обучение по программе дополнительного профессионального образования.</p>
-    <?php if ((int)($_SESSION['user_role']??0)===1): ?><a href="/DE/korochki/pages/admin.php" class="btn btn-primary" style="width:auto">Панель администратора</a><?php elseif (isset($_SESSION['user_id'])): ?>
-        <a href="/DE/korochki/pages/new.php" class="btn btn-primary" style="width: auto; padding: 12px 30px; font-size: 16px;">Подать заявку на курс</a>
+    <?php if ((int)($_SESSION['user_role']??0)===1): ?><a href="admin.php" class="btn btn-primary" style="width:auto">Панель администратора</a><?php elseif (isset($_SESSION['user_id'])): ?>
+        <a href="new.php" class="btn btn-primary" style="width: auto; padding: 12px 30px; font-size: 16px;">Подать заявку на курс</a>
     <?php else: ?>
-        <a href="/DE/korochki/pages/register.php" class="btn btn-primary" style="width: auto; padding: 12px 30px; font-size: 16px;">Зарегистрироваться</a>
+        <a href="register.php" class="btn btn-primary" style="width: auto; padding: 12px 30px; font-size: 16px;">Зарегистрироваться</a>
     <?php endif; ?>
 </div>
 

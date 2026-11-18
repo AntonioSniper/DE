@@ -333,3 +333,5 @@ body{background-color:var(--bg-color);background-image:radial-gradient(#ded8cf 0
 .calendar-button{border-color:#cebdd1;background:#eee3ef;border-radius:7px}.calendar-button:hover{background:#e3d1e5}
 .site-footer{border-top:1px solid #d8b28c;background:#fff0e0;color:#826f71;font-size:12px;letter-spacing:.15px}
 @media(max-width:768px){body{background-size:20px 20px}.site-title{font-size:28px}.logo img{border-radius:9px 3px 9px 3px;padding:2px}.form-container{padding:25px 20px;box-shadow:4px 5px 0 #e9e3e155}.form-container h2{font-size:27px}.hero-text h1{font-size:26px}.page-heading{font-size:27px}.form-group input,.form-group select,.form-group textarea,.inline-review textarea{font-size:16px}.request-card-body{padding:18px}.request-card-body strong{font-size:12px}.nav-btn{padding:9px 13px}.site-footer{font-size:11px}}
+
+.status-popup { position: fixed; bottom: 1rem; right: 1rem; z-index: 10; width: min(24rem, calc(100% - 2rem)); }

@@ -1,13 +1,22 @@
 ﻿$ErrorActionPreference='Stop'
-$xampp='C:\Users\danya\Documents\Codex\xampp'
+$candidates = @(
+    $env:XAMPP_HOME
+    (Join-Path $env:SystemDrive 'xampp')
+    (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Codex\xampp')
+)
+$xampp = $candidates | Where-Object {
+    $_ -and (Test-Path -LiteralPath (Join-Path $_ 'php\php.exe')) -and
+    (Test-Path -LiteralPath (Join-Path $_ 'mysql\bin\mysqld.exe'))
+} | Select-Object -First 1
+if (!$xampp) { throw 'Укажите каталог установки XAMPP в переменной среды XAMPP_HOME.' }
 $app=Join-Path $PSScriptRoot 'приложение'
 $runtime=Join-Path $PSScriptRoot '.runtime'
 New-Item -ItemType Directory -Force -Path $runtime | Out-Null
 function OpenPort([int]$port){$client=[Net.Sockets.TcpClient]::new();try{$client.Connect('127.0.0.1',$port);return $true}catch{return $false}finally{$client.Dispose()}}
 if(OpenPort 8081){Write-Host 'Порт 8081 уже занят. Если сайт запущен, откройте http://127.0.0.1:8081';exit 0}
-$state=@{phpId=$null;mysqlId=$null;phpStarted=$null;mysqlStarted=$null}
+$state=@{xampp=$xampp;phpId=$null;mysqlId=$null;phpStarted=$null;mysqlStarted=$null}
 if(!(OpenPort 3306)){
- $mysql=Start-Process -FilePath (Join-Path $xampp 'mysql\bin\mysqld.exe') -ArgumentList @('--defaults-file="'+$xampp+'\mysql\bin\my.ini"','--standalone','--console') -WorkingDirectory $xampp -WindowStyle Hidden -RedirectStandardOutput (Join-Path $runtime 'mysql-out.log') -RedirectStandardError (Join-Path $runtime 'mysql-error.log') -PassThru
+ $mysql=Start-Process -FilePath (Join-Path $xampp 'mysql\bin\mysqld.exe') -ArgumentList @(('--defaults-file="'+$xampp+'\mysql\bin\my.ini"'),'--standalone','--console') -WorkingDirectory $xampp -WindowStyle Hidden -RedirectStandardOutput (Join-Path $runtime 'mysql-out.log') -RedirectStandardError (Join-Path $runtime 'mysql-error.log') -PassThru
  $state.mysqlId=$mysql.Id
  $state.mysqlStarted=$mysql.StartTime.ToUniversalTime().Ticks.ToString()
  $state|ConvertTo-Json|Set-Content (Join-Path $runtime 'processes.json') -Encoding UTF8

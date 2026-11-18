@@ -1,8 +1,13 @@
 ﻿$ErrorActionPreference='Stop'
-$xampp='C:\Users\danya\Documents\Codex\xampp'
+
 $stateFile=Join-Path $PSScriptRoot '.runtime\processes.json'
 if(!(Test-Path -LiteralPath $stateFile)){Write-Host 'Нет процессов, запущенных этим скриптом.';exit 0}
 $state=Get-Content -Raw -LiteralPath $stateFile|ConvertFrom-Json
+$xampp = $state.xampp
+if (!$xampp) {
+    # PID files created by the previous launcher did not record the installation.
+    $xampp = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Codex\xampp'
+}
 if($state.phpId){
  $proc=Get-Process -Id ([int]$state.phpId) -ErrorAction SilentlyContinue
  if($proc -and $proc.Path -eq (Join-Path $xampp 'php\php.exe') -and $proc.StartTime.ToUniversalTime().Ticks.ToString() -eq $state.phpStarted){Stop-Process -Id $proc.Id}

@@ -1,15 +1,15 @@
 <?php
-session_start();
+
 require_once __DIR__ . '/../helpers/db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /DE/korochki/pages/auth.php');
+    header('Location: auth.php');
     exit;
 }
 
 $pageTitle = 'Мои заявки — Корочки.Есть';
 $breadcrumbs = [
-    ['title' => 'Главная', 'url' => '/DE/korochki/pages/index.php'],
+    ['title' => 'Главная', 'url' => 'index.php'],
     ['title' => 'Мои заявки', 'url' => '#']
 ];
 
@@ -41,7 +41,7 @@ ob_start();
 <?php if(isset($_SESSION['review_error'])): ?><div class="alert alert-danger" role="alert"><?=e($_SESSION['review_error'])?></div><?php unset($_SESSION['review_error']);endif?>
 <?php if(isset($_SESSION['flash'])): ?><div class="alert alert-success" role="status"><?=e($_SESSION['flash'])?></div><?php unset($_SESSION['flash']);endif?>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <a href="/DE/korochki/pages/new.php" class="btn btn-primary" style="width: auto;">Создать новую заявку</a>
+    <a href="new.php" class="btn btn-primary" style="width: auto;">Создать новую заявку</a>
 </div>
 
 <div class="requests-grid">
@@ -63,7 +63,7 @@ ob_start();
                     </div>
                 <?php elseif ($req['name_status'] === 'Обучение завершено'): ?>
                     <div style="margin-top: 10px;">
-                        <form action="review.php?request_id=<?=$req['id_request']?>" method="post" class="inline-review">
+                        <form action="review.php?request_id=<?=$req['id_request']?>" method="post" class="inline-review"><?= csrf() ?>
                             <input type="hidden" name="p" value="<?=$currentPage?>">
                             <label for="review-<?=$req['id_request']?>">Оставить отзыв</label>
                             <textarea name="comment" id="review-<?=$req['id_request']?>" rows="3" maxlength="3000" required></textarea>

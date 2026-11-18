@@ -3,7 +3,7 @@
 Сайт: http://localhost/korochki/
 
 Исходники этого проекта находятся в папке «первая часть» общего репозитория.
-XAMPP: C:\Users\danya\Documents\Codex\xampp. Запуск: xampp-control.exe → Start у Apache и MySQL.
+В Windows запустите Apache и MySQL через панель XAMPP. В RED ОС используйте Apache и MariaDB из установленного XAMPP.
 Администратор: Admin / KorokNET. Обычный пользователь регистрируется на сайте.
 
 Для переноса скопируйте korochki в XAMPP/htdocs/korochki, импортируйте korochki_db.sql в пустую БД и проверьте config.php. Нужны PHP 8.2+, pdo_mysql и mbstring. Не импортируйте SQL повторно поверх существующих таблиц. Bootstrap, JS и изображения локальные.

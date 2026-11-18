@@ -1,16 +1,16 @@
 <?php
-session_start();
+
 require_once __DIR__ . '/../helpers/db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /DE/korochki/pages/auth.php');
+    header('Location: auth.php');
     exit;
 }
 
 $pageTitle = 'Подача заявки — Корочки.Есть';
 $breadcrumbs = [
-    ['title' => 'Главная', 'url' => '/DE/korochki/pages/index.php'],
-    ['title' => 'Мои заявки', 'url' => '/DE/korochki/pages/zayavki.php'],
+    ['title' => 'Главная', 'url' => 'index.php'],
+    ['title' => 'Мои заявки', 'url' => 'zayavki.php'],
     ['title' => 'Подача заявки', 'url' => '#']
 ];
 
@@ -21,14 +21,14 @@ $courses = $pdo->query("SELECT * FROM courses")->fetchAll();
 $payments = $pdo->query("SELECT * FROM payments")->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $courseId = (int)($_POST['course'] ?? 0);
+    $courseId = filter_var($_POST['course'] ?? '', FILTER_VALIDATE_INT);
     $rawDate=trim($_POST['date']??'');
     $parsedDate=DateTimeImmutable::createFromFormat('!d.m.Y',$rawDate);
     $date=$parsedDate?$parsedDate->format('Y-m-d'):'';
-    $paymentId = (int)($_POST['payment'] ?? 0);
+    $paymentId = filter_var($_POST['payment'] ?? '', FILTER_VALIDATE_INT);
     $userId = $_SESSION['user_id'];
 
-    if (!in_array($courseId,array_column($courses,'id_course')) || !in_array($paymentId,array_column($payments,'id_payment')) || !$parsedDate || $parsedDate->format('d.m.Y')!==$rawDate) {
+    if (!in_array($courseId,array_column($courses,'id_course')) || !in_array($paymentId,array_column($payments,'id_payment')) || !$parsedDate || $parsedDate->format('d.m.Y')!==$rawDate || (int)$parsedDate->format('Y') < 1000) {
         $error = 'Выберите курс, способ оплаты и существующую дату в формате ДД.ММ.ГГГГ.';
     } else {
         try {
@@ -50,7 +50,7 @@ ob_start();
     <?php if ($error): ?><div style="color: red; text-align: center; margin-bottom: 15px;"><?= htmlspecialchars($error) ?></div><?php endif; ?>
     <?php if ($success): ?><div style="color: green; text-align: center; margin-bottom: 15px;"><?= $success ?></div><?php endif; ?>
 
-    <form action="" method="POST">
+    <form action="" method="POST"><?= csrf() ?>
         <div class="form-group">
             <label for="course">Наименование курса</label>
             <select name="course" id="course" required>
@@ -75,7 +75,7 @@ ob_start();
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Отправить</button>
-            <a href="/DE/korochki/pages/zayavki.php" class="btn-link">Мои заявки</a>
+            <a href="zayavki.php" class="btn-link">Мои заявки</a>
         </div>
     </form>
 </div>
